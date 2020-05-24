@@ -1,8 +1,14 @@
 const { Router } = require('express');
-const { login } = require('./auth.controller');
+const passport = require('passport');
+const auth = require('./auth.controller');
 const makeCallback = require('../../lib/makeCallback');
 const router = Router();
 
-router.get('/login', makeCallback(login));
+router.post(
+  '/login',
+  passport.authenticate('local', { session: false, failWithError: true }),
+  makeCallback(auth.login)
+);
+router.post('/register', makeCallback(auth.register));
 
 module.exports = router;

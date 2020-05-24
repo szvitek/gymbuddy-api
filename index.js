@@ -1,17 +1,17 @@
 const express = require('express');
-const { PORT } = require('./config');
-const authRoutes = require('./api/auth/auth.routes');
-const error = require('./middlewares/error');
+const { port } = require('./config');
 
 const app = express();
 
-app.use('/auth', authRoutes);
-app.use(error);
+require('./boot/passport-local')(app);
+require('./boot/routes')(app);
+require('./boot/db')();
 
+// test route, kinda healthcheck
 app.get('/', (req, res) => {
   res.json({ hello: 'world ' });
 });
 
-app.listen(PORT, () => {
-  console.log(`app is running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`app is running on port ${port}`);
 });

@@ -1,14 +1,22 @@
 const makeError = require('../../lib/makeError');
+const { User, validate } = require('./user.model');
 
-function login() {
-  // do async stuff
-  const isLoginValid = true;
-
-  if (isLoginValid) {
-    return { login: 'works' };
-  }
-  throw new Error('aaa'); // global error handler will catch
-  // return makeError('invalid login', 401);
+function login(context) {
+  const { user } = context;
+  return user.login();
 }
 
-module.exports = { login };
+async function register(context) {
+  const { body } = context;
+  const { error } = validate(body);
+  if (error) return makeError(error.details[0].message, 400);
+
+  const existingUser = await User.findOne({ email: body.email });
+  if (existingUser) return makeError('User already registered', 400);
+
+  const user = new User(body);
+  await user.save();
+  return user.login();
+}
+
+module.exports = { login, register };
