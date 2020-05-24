@@ -7,18 +7,18 @@ const { jwtSecret } = require('../../config');
 const userSchema = new Schema({
   name: {
     type: String,
-    required: true,
+    required: true
   },
   email: {
     type: String,
     required: true,
-    unique: true,
+    unique: true
   },
   password: {
     type: String,
     required: true,
-    minlength: 8,
-  },
+    minlength: 8
+  }
 });
 
 userSchema.pre('save', async function () {
@@ -57,7 +57,7 @@ function validateUser(user) {
   const schema = Joi.object({
     name: Joi.string().required(),
     email: Joi.string().required().email(),
-    password: Joi.string().min(8).required(),
+    password: Joi.string().min(8).required()
   });
 
   return schema.validate(user);
