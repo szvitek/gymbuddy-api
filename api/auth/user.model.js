@@ -37,12 +37,6 @@ userSchema.methods.verifyPassword = function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-userSchema.methods.login = function () {
-  const user = this.serialize();
-  const token = this.generateAuthToken(user);
-  return { user, token };
-};
-
 userSchema.methods.serialize = function () {
   const { password, __v, ...userObj } = this.toObject();
   return userObj;
