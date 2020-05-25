@@ -3,7 +3,7 @@ const { port } = require('./config');
 
 const app = express();
 
-require('./boot/passport-local')(app);
+require('./boot/passport')(app);
 require('./boot/routes')(app);
 require('./boot/db')();
 

@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const Joi = require('@hapi/joi');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { jwtSecret } = require('../../config');
+const { jwtSecret, jwtExp } = require('../../config');
 
 const userSchema = new Schema({
   name: {
@@ -43,7 +43,10 @@ userSchema.methods.serialize = function () {
 };
 
 userSchema.methods.generateAuthToken = function (payload) {
-  const token = jwt.sign(payload, jwtSecret);
+  const token = jwt.sign(payload, jwtSecret, {
+    expiresIn: jwtExp,
+    subject: this._id.toString()
+  });
   return token;
 };
 
