@@ -51,7 +51,7 @@ makeError('invalid login', 401)
 
 - ~~categories module~~
 - ~~implement passport-jwt~~
-- [todo] users module
+- ~~users module~~
 - [todo] exercises module
 - [todo] workouts module
 - [todo] tests
