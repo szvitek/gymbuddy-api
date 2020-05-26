@@ -47,15 +47,24 @@ makeError('invalid login', 401)
 
 ## todos / roadmap
 
+### review asap:
+
+- version keys (exercise.service)
+- conditional populate via query param (exercise.service)
+- PUT vs validation (exercise.service)
+
 ### must have for 1.0:
 
 - ~~categories module~~
 - ~~implement passport-jwt~~
 - ~~users module~~
-- [todo] exercises module
+- [reviewing] exercises module
 - [todo] workouts module
 - [todo] tests
-- ? refactors, bugfixes, new features, etc...
+- [todo] add error logger/debugger
+- [todo] api docs
+- [idea] paginate results?
+- ? refactors, bugfixes, db optimizations, new features, etc...
 
 ### additionals / nice to have features:
 

@@ -6,6 +6,7 @@ const app = express();
 require('./boot/passport')(app);
 require('./boot/routes')(app);
 require('./boot/db')();
+require('./boot/validation')();
 
 // test route, kinda healthcheck
 app.get('/', (req, res) => {
