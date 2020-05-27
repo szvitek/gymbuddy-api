@@ -59,6 +59,9 @@ makeError('invalid login', 401)
 - ~~implement passport-jwt~~
 - ~~users module~~
 - [reviewing] exercises module
+- ~~CORS~~
+- ~~confirm password (with custom error message) when register~~
+- [todo] app should create sample groups and exercises when a new user registers
 - [todo] workouts module
 - [todo] tests
 - [todo] add error logger/debugger

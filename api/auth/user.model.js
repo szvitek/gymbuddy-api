@@ -50,17 +50,38 @@ userSchema.methods.generateAuthToken = function (payload) {
   return token;
 };
 
-function validateUser(user) {
+function validateUser(userDTO) {
   const schema = Joi.object({
     name: Joi.string().required(),
     email: Joi.string().required().email(),
     password: Joi.string().min(8).required()
   });
 
-  return schema.validate(user);
+  return schema.validate(userDTO);
+}
+
+function validateReg(registerDTO) {
+  const schema = Joi.object({
+    name: Joi.string().required(),
+    email: Joi.string().required().email(),
+    password: Joi.string().min(8).required(),
+    confirmPassword: Joi.string()
+      .valid(Joi.ref('password'))
+      .required()
+      .error(() => {
+        const error = new Error();
+        error.details = [
+          { message: 'Password and confirm password does not match' }
+        ];
+        return error;
+      })
+  });
+
+  return schema.validate(registerDTO);
 }
 
 const User = model('User', userSchema);
 
 exports.User = User;
 exports.validate = validateUser;
+exports.validateReg = validateReg;

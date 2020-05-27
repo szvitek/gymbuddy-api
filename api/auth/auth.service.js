@@ -1,4 +1,4 @@
-const { User, validate } = require('./user.model');
+const { User, validateReg } = require('./user.model');
 const makeError = require('../../lib/makeError');
 
 function login(context) {
@@ -9,14 +9,15 @@ function login(context) {
 }
 
 async function register(context) {
-  const { body: userDTO } = context;
-  const { error } = validate(userDTO);
+  const { body: registerDTO } = context;
+  const x = validateReg(registerDTO);
+  const { error } = validateReg(registerDTO);
   if (error) return makeError(error.details[0].message, 400);
 
-  const existingUser = await User.findOne({ email: userDTO.email });
+  const existingUser = await User.findOne({ email: registerDTO.email });
   if (existingUser) return makeError('User already registered', 400);
 
-  const user = new User(userDTO);
+  const user = new User(registerDTO);
   return user.save();
 }
 
