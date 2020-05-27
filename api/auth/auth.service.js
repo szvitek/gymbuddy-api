@@ -10,7 +10,6 @@ function login(context) {
 
 async function register(context) {
   const { body: registerDTO } = context;
-  const x = validateReg(registerDTO);
   const { error } = validateReg(registerDTO);
   if (error) return makeError(error.details[0].message, 400);
 
