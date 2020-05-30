@@ -11,7 +11,9 @@ const categorySchema = new Schema({
 
 function validateCategory(category) {
   const schema = Joi.object({
-    name: Joi.string().min(3).required()
+    name: Joi.string().min(3).required(),
+    user: Joi.objectId(),
+    _id: Joi.objectId()
   });
 
   return schema.validate(category);

@@ -11,6 +11,7 @@ async function create(context) {
     user: { _id: userId }
   } = context;
   const { error } = validate(createExDTO);
+  // todo: userId shouldn't be required for validation, it's part of request anyway
   if (error) return makeError(error.details[0].message, 400);
 
   const ex = new Exercise({ ...createExDTO, user: userId });

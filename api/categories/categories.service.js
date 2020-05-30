@@ -27,7 +27,7 @@ async function findOne(context) {
     user: { _id: userId }
   } = context;
 
-  const cat = await Category.findOne({ _id: id, user: userId });
+  const cat = await Category.findOne({ _id: id, user: userId }).select('-__v');
   if (!cat) return makeError('Category not found', 404);
   return cat;
 }
